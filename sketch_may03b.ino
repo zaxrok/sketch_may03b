@@ -69,10 +69,10 @@ int pinSpeedL = 5;
 
 // MOTOR_RIGHT
 int pinSpeedR = 6;
-int pinDirR = A5;
+int pinDirR = 3;
 
 // sonar
-const int pinEcho = A7;  // 초음파 센서 Echo 단자 연결 핀 번호
+const int pinEcho = A0;  // 초음파 센서 Echo 단자 연결 핀 번호
 const int pinTrig = 13;  // 초음파 센서 Trig 단자 연결 핀 번호
 
 //////////////////////////////////// union ////////////////////////////////////
@@ -100,7 +100,7 @@ char    serialRead;       // real data
 unsigned char prevc = 0;  // real data
 byte    index = 0;        // buffer index
 char    buffer[52];       // real buffer
-
+int preDistance = 0;      // 초음파 -1 때문에
 //////////////////////////////////// send data to serial ////////////////////////////////////
 void sendByte(char c){
   writeSerial(1); // byte 
@@ -188,7 +188,8 @@ int  GetDistance(){
   digitalWrite( pinTrig, LOW ); 
   int  duration = pulseIn( pinEcho, HIGH );
   int  distance = (duration / 2) / 29.1;   
-
+  if(distance < 0 ) distance = preDistance;
+  preDistance = distance;
   return  distance;
 }
 /*
@@ -240,9 +241,13 @@ void runModule(int device){
         move(MOTOR_L, FORWARD, value);
         move(MOTOR_R, REVERSE, value); 
       }
-      else{
-        move(MOTOR_L, dir, value);
-        move(MOTOR_R, dir, value); 
+      else if(dir == 1){ // backward
+        move(MOTOR_L, REVERSE, value);
+        move(MOTOR_R, REVERSE, value); 
+      }
+      else if(dir == 0){
+        move(MOTOR_L, FORWARD, value);
+        move(MOTOR_R, FORWARD, value); 
       }
      break;
      
