@@ -1,5 +1,6 @@
 
 /*  
+ *  new CodeStar 목업용
  *  코드스타: Power scratch externsion block
  *  (주)이산솔루션, www.isans.co.kr
  */
@@ -61,6 +62,7 @@ enum protocol{
 const int pinRed = 7;  // 빨간눈(Red LED) 연결 핀 번호
 const int pinBlue = 8; // 파란눈(Blue LED) 연결 핀 번호
 const int pinBuzzer = A3;
+const int pinLeftIR = A7;  
 const int tones[13] = {196,220,247,262,294,330,349,392,440,494,523,587,659};
 //////////////////////////////////// defined pin ////////////////////////////////////
 // MOTOR_LEFT
@@ -72,7 +74,7 @@ int pinSpeedR = 6;
 int pinDirR = 3;
 
 // sonar
-const int pinEcho = A0;  // 초음파 센서 Echo 단자 연결 핀 번호
+const int pinEcho = A1;  // 초음파 센서 Echo 단자 연결 핀 번호
 const int pinTrig = 13;  // 초음파 센서 Trig 단자 연결 핀 번호
 
 //////////////////////////////////// union ////////////////////////////////////
@@ -407,7 +409,8 @@ void setup() {
   // sonar
   pinMode(pinTrig, OUTPUT); // 출력용 핀으로 설정
   pinMode(pinEcho, INPUT);  // 입력용 핀으로 설정
-        
+
+  pinMode(pinLeftIR, INPUT); 
   // put your setup code here, to run once:
   // put your setup code here, to run once:
   Serial.begin(9600);
