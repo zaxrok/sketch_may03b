@@ -3,6 +3,7 @@
  *  new CodeStar 목업용
  *  코드스타: Power scratch externsion block
  *  (주)이산솔루션, www.isans.co.kr
+ *  
  */
 
 #include <Wire.h> // I2C Arduino Library
@@ -436,11 +437,11 @@ void setup() {
   noTone(pinBuzzer);
 
  
-  remocon.enableIRIn(); // IR 리모콘 신호 수신 시작
+  //remocon.enableIRIn(); // IR 리모콘 신호 수신 시작
 
   // geometric sensor
   TWBR = 78;  // lower I2C clock : 25 kHz 
-  TWSR |= _BV (TWPS0);  // change prescaler  
+  TWSR |= _BV (TWPS0);  // change prescaler        
 }
 
 void loop() { 
